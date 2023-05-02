@@ -28,24 +28,24 @@ postsRouter.post("/create", async (req, res) => {
 });
 
 // PATCH Router
-// postsRouter.patch("/update/:id", async (req, res) => {
-//   const payload = req.body;
-//   const id = req.params.id;
-//   const post = await PostModel.find({ _id: id });
-//   const userID_in_post = post[0].userID;
-//   const userID_making_req = req.body.userID;
+postsRouter.patch("/update/:id", async (req, res) => {
+  const payload = req.body;
+  const id = req.params.id;
+  const post = await PostModel.find({ _id: id });
+  const userID_in_post = post[0].userID;
+  const userID_making_req = req.body.userID;
 
-//   try {
-//     if (userID_making_req !== userID_in_post) {
-//       res.send({ msg: "You Are Not Authorised" });
-//     } else {
-//       await PostModel.findByIdAndUpdate({ _id: id }, payload);
-//       res.send("Your post has updated successfully");
-//     }
-//   } catch (err) {
-//     res.send({ msg: "Something Went Wrong" });
-//   }
-// });
+  try {
+    if (userID_making_req !== userID_in_post) {
+      res.send({ msg: "You Are Not Authorised" });
+    } else {
+      await PostModel.findByIdAndUpdate({ _id: id }, payload);
+      res.send("Your post has updated successfully");
+    }
+  } catch (err) {
+    res.send({ msg: "Something Went Wrong" });
+  }
+});
 
 //DELETE Router
 postsRouter.delete("/delete/:id", async (req, res) => {
